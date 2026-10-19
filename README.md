@@ -12,6 +12,34 @@ In North America, the company relies on it's US-based Freight auditor for it's f
 
 ---
 
+```mermaid
+graph TD
+    A[Carrier Invoices: PDF, EDI, API, Flat File] --> B[7Bridges / Loop Ingestion Engine]
+    
+    subgraph Data Processing & Validation
+        B --> C{Multi-Currency & FX Engine}
+        C -->|EUR, GBP, CHF, PLN| D[ECB Benchmark Rate Conversion]
+        B --> E{Tax & Regional Governance}
+        E -->|EU / UK Mandates| F[Reverse Charge VAT & Duty Verification]
+        B --> G{Rate Audit Engine}
+        G -->|Contract Discrepancy| H[Automated Carrier Rejection / Credit]
+    end
+
+    D --> I[Normalized Line-Item Data Layer]
+    F --> I
+    G -->|Verified Line Items| I
+    
+    I --> J[Automated GL Mapping & ERP Mass-Upload]
+    
+    subgraph Data Governance & Privacy Boundary
+        I --> K{Contractual AI Safeguards}
+        K -->|PHI / PII Protection| L[Zero-Retention Policy]
+        K -->|Strict Exclusivity| M[Prohibited AI / LLM Model Training]
+    end
+```
+
+---
+
 ## 📊 Commercial Evaluation & ROI Scenarios
 
 The RFP evaluated a proposed challenger solution across standard and intermediate tiers, comparing projected audit recovery and simulation capabilities against existing the incumbent baselines:
